@@ -6,10 +6,16 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { FiHome, FiMenu, FiGrid, FiChevronDown } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FcAbout } from "react-icons/fc";
 import { FaPersonDotsFromLine } from "react-icons/fa6";
+=======
+import { FiHome, FiMenu, FiGrid } from "react-icons/fi";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { FcAbout } from "react-icons/fc";
+>>>>>>> 997a541e9222c7bbb85c2a5bf9ba5440e3493bd9
 
 const Sidebar = () => {
   const { isSignedIn } = useUser();
@@ -54,6 +60,7 @@ const Sidebar = () => {
             {isOpen && <span className="ml-4">Home</span>}
           </Link>
           {isSignedIn && (
+<<<<<<< HEAD
             <Link
               to="/myOrder"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
@@ -103,6 +110,25 @@ const Sidebar = () => {
               <FcAbout size={24} />
               {isOpen && <span className="ml-4">About Us</span>}
             </Link>
+=======
+            <>
+              <Link
+                to="/orders"
+                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+              >
+                <MdOutlineShoppingCart size={24} />
+                {isOpen && <span className="ml-4">My Order</span>}
+              </Link>
+              <Link
+                to="/aboutus"
+                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+              >
+                <FcAbout size={24} />
+
+                {isOpen && <span className="ml-4">About US</span>}
+              </Link>
+            </>
+>>>>>>> 997a541e9222c7bbb85c2a5bf9ba5440e3493bd9
           )}
         </nav>
         <div className={`mt-auto p-4 ${isOpen ? "text-left" : "text-center"}`}>
