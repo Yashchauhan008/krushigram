@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { FiHome, FiMenu, FiGrid, } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FcAbout } from "react-icons/fc";
+import { FaPersonDotsFromLine } from "react-icons/fa6";
 
 
 
@@ -49,16 +50,26 @@ const Sidebar = () => {
           </Link>
           {isSignedIn && (
             <Link
-              to="/dashboard"
+              to="/myOrder"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
             >
               <MdOutlineShoppingCart  size={24} />
               {isOpen && <span className="ml-4">My Order</span>}
             </Link>
           )}
+          {isSignedIn && (
+            <Link
+              to="/becomeSeller"
+              className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+            >
+              <FaPersonDotsFromLine
+              size={24} />
+              {isOpen && <span className="ml-4">Become a Seller</span>}
+            </Link>
+          )}
           {isSignedIn && (  
             <Link
-              to="/dashboard"
+              to="/aboutus"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
             >
               <FcAbout size={24}/>
