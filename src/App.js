@@ -41,7 +41,7 @@ const App = () => {
     <Router>
       <div className={`flex ${isSignedIn ? 'flex-row' : 'flex-col'}`}>
         {isSignedIn ? <Sidebar /> : <Navbar />}
-        <div className="flex-grow p-8">
+        <div className="flex-grow">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<Home />} />

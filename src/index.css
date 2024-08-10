@@ -291,6 +291,9 @@ body {
 /* ----------------------------------------css from priyank------home--------- */
 .buttons{
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 }
 .button {
   --width: 100px;
@@ -565,5 +568,17 @@ svg {
 
 
 .home{
+  margin: 0;
   display: inline-block;
+  height: 99.10vh;
+  padding: 10px;
+  width: 100%;
+  /* background-color: red; */
+  overflow-y:scroll ;
+}
+
+.btn-home{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
