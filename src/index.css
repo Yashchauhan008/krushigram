@@ -55,7 +55,11 @@ body {
   height: 180px;
   background-size: cover;
   background-position: center;
+  object-fit: cover; /* Ensures the image covers the entire area */
+  border-radius: 8px; /* Optional: adds rounded corners */
+  overflow: hidden; /* Ensures the image doesn’t overflow the card */
 }
+
 
 /* Card Content */
 .card-content {

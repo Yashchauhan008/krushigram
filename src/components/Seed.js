@@ -13,7 +13,7 @@ const SeedsList = () => {
           },
           harvestingTime: new Date("2024-09-01T00:00:00Z"),
           images: [
-            "path/to/image1.jpg",
+            "https://5.imimg.com/data5/ST/QW/MY-38700875/fresh-wheat-crop.jpg",
             "path/to/image2.jpg",
           ],
           cropType: "Harvested",
