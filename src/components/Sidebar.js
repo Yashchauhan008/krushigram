@@ -6,23 +6,24 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
-import { FiHome, FiMenu, FiGrid, } from "react-icons/fi";
+import { FiHome, FiMenu, FiGrid, FiChevronDown } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { FcAbout } from "react-icons/fc";
 import { FaPersonDotsFromLine } from "react-icons/fa6";
 
-
-
 const Sidebar = () => {
   const { isSignedIn } = useUser();
   const [isOpen, setIsOpen] = useState(true);
+  const [isSeller, setIsSeller] = useState(true); // Simulated isSeller state
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
     <>
       <div
-        className={` inline-block transition-transform h-screen bg-gray-800 text-white flex flex-col ${
+        className={`inline-block transition-transform h-screen bg-gray-800 text-white flex flex-col ${
           isOpen ? "w-64" : "w-15"
         } transition-width duration-500`}
       >
@@ -31,7 +32,11 @@ const Sidebar = () => {
             isOpen ? "between" : "center"
           } p-4`}
         >
-          {isOpen && <h1 className="text-2xl font-bold bg-success p-2 rounded me-3">KRUSHIGRAM</h1>}
+          {isOpen && (
+            <h1 className="text-2xl font-bold bg-success p-2 rounded me-3">
+              KRUSHIGRAM
+            </h1>
+          )}
           <button onClick={toggleSidebar} className="focus:outline-none">
             <FiMenu size={24} />
           </button>
@@ -53,28 +58,50 @@ const Sidebar = () => {
               to="/myOrder"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
             >
-              <MdOutlineShoppingCart  size={24} />
+              <MdOutlineShoppingCart size={24} />
               {isOpen && <span className="ml-4">My Order</span>}
             </Link>
           )}
-          {isSignedIn && (
-            <Link
-              to="/becomeSeller"
-              className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
-            >
-              <FaPersonDotsFromLine
-              size={24} />
-              {isOpen && <span className="ml-4">Become a Seller</span>}
-            </Link>
+          {isSignedIn && isSeller && (
+            <div className="w-full">
+              <div
+                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded cursor-pointer"
+                onClick={toggleDropdown}
+              >
+                <FaPersonDotsFromLine size={24} />
+                {isOpen && <span className="ml-4">Become a Seller</span>}
+                <FiChevronDown
+                  size={24}
+                  className={`transform transition-transform ${
+                    dropdownOpen ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </div>
+              {dropdownOpen && (
+                <div className="ml-8 mt-2">
+                  <Link
+                    to="/addProduct"
+                    className="block p-2 hover:bg-gray-700 rounded"
+                  >
+                    {isOpen && <span>Add Product</span>}
+                  </Link>
+                  <Link
+                    to="/seeCustomers"
+                    className="block p-2 hover:bg-gray-700 rounded"
+                  >
+                    {isOpen && <span>See Customers</span>}
+                  </Link>
+                </div>
+              )}
+            </div>
           )}
-          {isSignedIn && (  
+          {isSignedIn && (
             <Link
               to="/aboutus"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
             >
-              <FcAbout size={24}/>
-              
-              {isOpen && <span className="ml-4">About US</span>}
+              <FcAbout size={24} />
+              {isOpen && <span className="ml-4">About Us</span>}
             </Link>
           )}
         </nav>
@@ -99,7 +126,6 @@ const Sidebar = () => {
           )}
         </div>
       </div>
-      {/* <Outlet/> */}
     </>
   );
 };

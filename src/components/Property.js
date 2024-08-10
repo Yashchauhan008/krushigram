@@ -1,5 +1,6 @@
 import React from "react";
 import "../index.css";
+import { Link } from "react-router-dom";
 
 const dummyProperties = [
   {
@@ -188,6 +189,7 @@ const ProductList = () => {
   return (
     
     <>
+    <Link to="/detailPage">
     <div className="cards">
       {dummyProperties.map((property, index) => (
         <div key={index} className="card">
@@ -217,6 +219,7 @@ const ProductList = () => {
         </div>
       ))}
       </div>
+      </Link>
     </>
   );
 };

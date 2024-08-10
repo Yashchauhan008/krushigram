@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
 import BecomeSeller from './pages/BecomeSeller';
+import DetailsPage from './pages/DetailsPage';
+import MyOrders from './pages/MyOrder';
+import AddProduct from './pages/AddProduct';
 
 const App = () => {
   const { isSignedIn } = useUser();
@@ -20,6 +23,11 @@ const App = () => {
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/becomeSeller" element={<BecomeSeller />} />
+            <Route path="/detailPage" element={<DetailsPage />} />
+            <Route path="/myOrder" element={<MyOrders />} />
+            <Route path="/addProduct" element={<AddProduct />} />
+
+
             {isSignedIn && <Route path="/dashboard" element={<Dashboard />} />}
           </Routes>
         </div>
