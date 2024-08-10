@@ -6,7 +6,11 @@ import {
   useUser,
 } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
-import { FiHome, FiMenu, FiGrid } from "react-icons/fi";
+import { FiHome, FiMenu, FiGrid, } from "react-icons/fi";
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { FcAbout } from "react-icons/fc";
+
+
 
 const Sidebar = () => {
   const { isSignedIn } = useUser();
@@ -19,14 +23,14 @@ const Sidebar = () => {
       <div
         className={` inline-block transition-transform h-screen bg-gray-800 text-white flex flex-col ${
           isOpen ? "w-64" : "w-15"
-        } transition-width duration-300`}
+        } transition-width duration-500`}
       >
         <div
           className={`flex items-center justify-${
             isOpen ? "between" : "center"
           } p-4`}
         >
-          {isOpen && <h1 className="text-2xl font-bold">MyApp</h1>}
+          {isOpen && <h1 className="text-2xl font-bold bg-success p-2 rounded me-3">KRUSHIGRAM</h1>}
           <button onClick={toggleSidebar} className="focus:outline-none">
             <FiMenu size={24} />
           </button>
@@ -48,8 +52,18 @@ const Sidebar = () => {
               to="/dashboard"
               className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
             >
-              <FiGrid size={24} />
-              {isOpen && <span className="ml-4">Dashboard</span>}
+              <MdOutlineShoppingCart  size={24} />
+              {isOpen && <span className="ml-4">My Order</span>}
+            </Link>
+          )}
+          {isSignedIn && (  
+            <Link
+              to="/dashboard"
+              className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+            >
+              <FcAbout size={24}/>
+              
+              {isOpen && <span className="ml-4">About US</span>}
             </Link>
           )}
         </nav>
