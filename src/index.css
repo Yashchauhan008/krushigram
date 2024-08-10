@@ -582,3 +582,7 @@ svg {
   align-items: center;
   justify-content: center;
 }
+
+.search input{
+border-radius: 20px;
+}

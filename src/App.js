@@ -33,6 +33,8 @@ import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
+import MyOrderList from './components/myorders';
+import AboutUs from './pages/aboutUs';
 
 const App = () => {
   const { isSignedIn } = useUser();
@@ -45,6 +47,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/orders" element={<MyOrderList />} />
+            <Route path="/aboutus" element={<AboutUs/>} />
             {/* {isSignedIn && <Route path="/home" element={<Dashboard />} />} */}
           </Routes>
         </div>
