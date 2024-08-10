@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav className="bg-green-700 text-white w-full shadow-md">
       <div className="flex justify-between items-center container">
         {/* Logo and Title */}
-        <Link to="/" className="text-3xl font-bold tracking-wide">KRISHIGRAM</Link>
+        <Link to="/" className="text-3xl font-bold tracking-wide">KRUSHIGRAM</Link>
         
         {/* Hamburger Menu for Mobile */}
         <button className="text-white focus:outline-none md:hidden" onClick={toggleMenu}>

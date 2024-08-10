@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
 import "../index.css";
+import { SignInButton } from "@clerk/clerk-react";
 
 const LandingPage = () => {
   return (
@@ -12,9 +13,15 @@ const LandingPage = () => {
               The All-in-One Farm to Fork Platform
             </h1>
             <p className="lead mb-4 animate-slide-up">
-              Unlock the power of local food. Start your free trial today to see why farms, food hubs, grocers, and restaurants choose Local Line as their exclusive local food commerce platform.
+              Unlock the power of local food. Start your free trial today to see
+              why farms, food hubs, grocers, and restaurants choose Local Line
+              as their exclusive local food commerce platform.
             </p>
-            <a href="#!" className="btn btn-primary btn-lg animate-bounce">Start Free Trial</a>
+            <SignInButton afterSignInUrl="/home">
+              <button className="bg-blue-500 btn-primary hover:bg-green-700 text-white font-bold py-2 px-4 rounded btn-lg animate-bounce">
+                Sign In
+              </button>
+            </SignInButton>
           </div>
         </div>
       </div>
@@ -118,6 +125,6 @@ const LandingPage = () => {
       </div> */}
     </>
   );
-}
+};
 
 export default LandingPage;
