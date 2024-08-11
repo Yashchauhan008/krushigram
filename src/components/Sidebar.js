@@ -8,7 +8,8 @@ import {
 import { Link } from "react-router-dom";
 import { FiHome, FiMenu, FiGrid } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { FcAbout } from "react-icons/fc";
+import { RiTeamFill } from "react-icons/ri";
+import { SiSellfy } from "react-icons/si";
 
 const Sidebar = () => {
   const { isSignedIn } = useUser();
@@ -22,7 +23,8 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`inline-block transition-transform h-screen bg-gray-800 text-white flex flex-col ${
+        style={{ backgroundColor: "#7BE495" }}
+        className={`inline-block transition-transform h-200 backdrop-blur-lg text-black shadow-lg flex flex-col ${
           isOpen ? "w-64" : "w-15"
         } transition-width duration-500`}
       >
@@ -32,9 +34,7 @@ const Sidebar = () => {
           } p-4`}
         >
           {isOpen && (
-            <h1 className="text-2xl font-bold bg-success p-2 rounded me-3">
-              KRUSHIGRAM
-            </h1>
+            <h1 className="text-2xl font-bold p-2 rounded me-3">KRUSHIGRAM</h1>
           )}
           <button onClick={toggleSidebar} className="focus:outline-none">
             <FiMenu size={24} />
@@ -42,12 +42,13 @@ const Sidebar = () => {
         </div>
         <nav
           className={`flex flex-col ${
-            isOpen ? "items-start p-2" : "items-center"
+            isOpen ? "w-full items-center p-2" : "items-center"
           } justify-center space-y-4 mt-8`}
         >
           <Link
             to="/home"
-            className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+            className="flex items-center justify-center p-2 rounded hover:bg-[#59C596]"
+            style={{ width: "100%" }}
           >
             <FiHome size={24} />
             {isOpen && <span className="ml-4">Home</span>}
@@ -56,25 +57,23 @@ const Sidebar = () => {
             <>
               <Link
                 to="/orders"
-                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+                className="flex items-center justify-center p-2 hover:bg-[#59C596] rounded"
               >
                 <MdOutlineShoppingCart size={24} />
                 {isOpen && <span className="ml-4">My Order</span>}
               </Link>
               <Link
-                to="/aboutus"
-                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+                to="/aboutUs"
+                className="flex items-center justify-center p-2 hover:bg-[#59C596] rounded"
               >
-                <FcAbout size={24} />
-
-                {isOpen && <span className="ml-4">About US</span>}
+                <RiTeamFill size={24} />
+                {isOpen && <span className="ml-4">About Us</span>}
               </Link>
               <Link
                 to="/becomeseller"
-                className="flex items-center justify-center p-2 hover:bg-gray-700 rounded"
+                className="flex items-center justify-center p-2 hover:bg-[#59C596] rounded"
               >
-                <FcAbout size={24} />
-
+                <SiSellfy size={24} />
                 {isOpen && <span className="ml-4">Become Seller</span>}
               </Link>
             </>
@@ -99,7 +98,7 @@ const Sidebar = () => {
           ) : (
             <UserButton />
           )}
-        </div>
+        </div>  
       </div>
     </>
   );

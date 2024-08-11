@@ -1,144 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
+
 const SeedsList = () => {
-    const dummyCrops = [
-        {
-          cropName: "Wheat",
-          cropQuantity: 1500,
-          price: 1200,
-          fertilizerUsed: {
-            fertilizerName: "NPK",
-            quantityUsed: 50,
-            isOrganic: true,
-          },
-          harvestingTime: new Date("2024-09-01T00:00:00Z"),
-          images: [
-            "https://5.imimg.com/data5/ST/QW/MY-38700875/fresh-wheat-crop.jpg",
-            "path/to/image2.jpg",
-          ],
-          cropType: "Harvested",
-          sellerId: "60d5f436f47c0f001d5e4c22", // Example ObjectId of a User
-        },
-        {
-          cropName: "Corn",
-          cropQuantity: 2000,
-          price: 1000,
-          fertilizerUsed: {
-            fertilizerName: "Urea",
-            quantityUsed: 30,
-            isOrganic: false,
-          },
-          harvestingTime: new Date("2024-10-15T00:00:00Z"),
-          images: [
-            "path/to/image3.jpg",
-            "path/to/image4.jpg",
-          ],
-          cropType: "Harvested",
-          sellerId: "60d5f436f47c0f001d5e4c23", // Example ObjectId of a User
-        },
-        {
-          cropName: "Rice",
-          cropQuantity: 1000,
-          price: 900,
-          fertilizerUsed: {
-            fertilizerName: "DAP",
-            quantityUsed: 40,
-            isOrganic: false,
-          },
-          harvestingTime: new Date("2024-11-01T00:00:00Z"),
-          images: [
-            "path/to/image5.jpg",
-            "path/to/image6.jpg",
-          ],
-          cropType: "Harvested",
-          sellerId: "60d5f436f47c0f001d5e4c24", // Example ObjectId of a User
-        },
-        {
-          cropName: "Soybean",
-          cropQuantity: 500,
-          price: 700,
-          fertilizerUsed: {
-            fertilizerName: "Compost",
-            quantityUsed: 20,
-            isOrganic: true,
-          },
-          harvestingTime: new Date("2024-12-15T00:00:00Z"),
-          images: [
-            "path/to/image7.jpg",
-            "path/to/image8.jpg",
-          ],
-          cropType: "Harvested",
-          sellerId: "60d5f436f47c0f001d5e4c25", // Example ObjectId of a User
-        },
-        {
-          cropName: "Tomato",
-          cropQuantity: 300,
-          price: 400,
-          fertilizerUsed: {
-            fertilizerName: "Tomato Mix",
-            quantityUsed: 10,
-            isOrganic: false,
-          },
-          harvestingTime: new Date("2024-08-20T00:00:00Z"),
-          images: [
-            "path/to/image9.jpg",
-            "path/to/image10.jpg",
-          ],
-          cropType: "Seed",
-          sellerId: "60d5f436f47c0f001d5e4c26", // Example ObjectId of a User
-        },
-        {
-          cropName: "Carrot",
-          cropQuantity: 250,
-          price: 300,
-          fertilizerUsed: {
-            fertilizerName: "Carrot Blend",
-            quantityUsed: 15,
-            isOrganic: true,
-          },
-          harvestingTime: new Date("2024-09-15T00:00:00Z"),
-          images: [
-            "path/to/image11.jpg",
-            "path/to/image12.jpg",
-          ],
-          cropType: "Seed",
-          sellerId: "60d5f436f47c0f001d5e4c27", // Example ObjectId of a User
-        },
-        {
-          cropName: "Cucumber",
-          cropQuantity: 400,
-          price: 500,
-          fertilizerUsed: {
-            fertilizerName: "Veggie Mix",
-            quantityUsed: 25,
-            isOrganic: false,
-          },
-          harvestingTime: new Date("2024-10-10T00:00:00Z"),
-          images: [
-            "path/to/image13.jpg",
-            "path/to/image14.jpg",
-          ],
-          cropType: "Seed",
-          sellerId: "60d5f436f47c0f001d5e4c28", // Example ObjectId of a User
-        },
-      ];
-      
-      
-    return (
-        <>
+  const [crops, setCrops] = useState([]);
+  const [fertilizers, setFertilizers] = useState([]);
+  const [equipment, setEquipment] = useState([]);
+
+  useEffect(() => {
+    // Fetch crops
+    const fetchCrops = async () => {
+      try {
+        const response = await fetch("https://krushigram-backend.onrender.com/crop");
+        const data = await response.json();
+        setCrops(data);
+      } catch (error) {
+        console.error("Error fetching crops:", error);
+      }
+    };
+
+    // Fetch fertilizers
+    const fetchFertilizers = async () => {
+      try {
+        const response = await fetch("https://krushigram-backend.onrender.com/fertilizer");
+        const data = await response.json();
+        setFertilizers(data);
+      } catch (error) {
+        console.error("Error fetching fertilizers:", error);
+      }
+    };
+
+    // Fetch equipment
+    const fetchEquipment = async () => {
+      try {
+        const response = await fetch("https://krushigram-backend.onrender.com/equipment");
+        const data = await response.json();
+        setEquipment(data);
+      } catch (error) {
+        console.error("Error fetching equipment:", error);
+      }
+    };
+
+    fetchCrops();
+    fetchFertilizers();
+    fetchEquipment();
+  }, []);
+
+  return (
     <div className="cards">
-      {dummyCrops.map((crop, index) => (
+      {crops.map((crop, index) => (
         <div key={index} className="card">
           <div className="card-img">
             {/* Example of using the first image from the images array */}
-            <img src={crop.images[0]} alt={`Crop ${index + 1}`} />
+            {Array.isArray(crop.images) && crop.images.length > 0 ? (
+              <img src={crop.images[0]} alt={`Crop ${index + 1}`} />
+            ) : (
+              <img src="/path/to/default/image.jpg" alt={`Crop ${index + 1}`} />
+            )}
           </div>
           <div className="card-info">
             <p className="text-title">{crop.cropName}</p>
             <p className="text-body">
               Quantity: {crop.cropQuantity} <br />
               Price: ${crop.price} <br />
-              Fertilizer Used: {crop.fertilizerUsed.fertilizerName} ({crop.fertilizerUsed.quantityUsed} kg, Organic: {crop.fertilizerUsed.isOrganic ? 'Yes' : 'No'}) <br />
+              Fertilizer Used: {crop.fertilizerName} ({crop.fertilizerQuantityUsed} kg, Organic: {crop.fertilizerIsOrganic ? 'Yes' : 'No'}) <br />
               Harvesting Time: {new Date(crop.harvestingTime).toLocaleDateString()} <br />
               Type: {crop.cropType}
             </p>
@@ -156,7 +80,6 @@ const SeedsList = () => {
         </div>
       ))}
     </div>
-    </>
   );
 };
 

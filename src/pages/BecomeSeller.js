@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BecomeSeller = () => {
     const [formData, setFormData] = useState({
@@ -6,6 +7,8 @@ const BecomeSeller = () => {
         email: '',
         phone: '',
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,6 +22,9 @@ const BecomeSeller = () => {
         e.preventDefault();
         console.log(formData);
         // Send formData to your backend API using fetch or axios
+
+        // After successful submission, navigate to another page
+        navigate('/addProduct'); // Change '/thank-you' to your desired route
     };
 
     return (

@@ -1,126 +1,137 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
 
-const AddProduct = () => {
-    const [formData, setFormData] = useState({
-        productName: '',
-        description: '',
-        price: '',
-        category: 'Fruits',
-        image: null
+const AddProperty = () => {
+  const [formData, setFormData] = useState({
+    propertyArea: "",
+    propertyAreaUnit: "Hectares",
+    address:"",
+    propertyPrice: "",
+    soilType: "",
+    isFarmable: false,
+    sellerId: "66b7578acfa0f88a21139026", // You might want to change this dynamically
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
     });
+  };
 
-    const handleChange = (e) => {
-        const { name, value, type, files } = e.target;
-        setFormData({
-            ...formData,
-            [name]: type === 'file' ? files[0] : value
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        const formDataToSend = new FormData();
-        formDataToSend.append('productName', formData.productName);
-        formDataToSend.append('description', formData.description);
-        formDataToSend.append('price', formData.price);
-        formDataToSend.append('category', formData.category);
-        if (formData.image) {
-            formDataToSend.append('image', formData.image);
-        }
+    form.append("propertyArea", formData.propertyArea);
+    form.append("propertyAreaUnit", formData.propertyAreaUnit);
+    form.append("address", formData.address);
+    form.append("propertyPrice", formData.propertyPrice);
+    form.append("soilType", formData.soilType);
+    form.append("isFarmable", formData.isFarmable);
+    form.append("sellerId", formData.sellerId);
 
-        try {
-            const response = await axios.post('YOUR_API_ENDPOINT_HERE', formDataToSend, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log('Product added successfully:', response.data);
-            // Optionally, handle success, e.g., show a success message or redirect
-        } catch (error) {
-            console.error('Error adding product:', error);
-            // Optionally, handle errors, e.g., show an error message
-        }
-    };
+    try {
+      const response = await fetch("https://krushigram-backend.onrender.com/property/", {
+        method: "POST",
+        body: form,
+      });
 
-    return (
-        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
-            <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
-                <h1 className="text-3xl font-bold text-green-800 mb-6 text-center">Add Product</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Product Name:</label>
-                        <input
-                            type="text"
-                            name="productName"
-                            value={formData.productName}
-                            onChange={handleChange}
-                            className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                            required
-                        />
-                    </div>
+      if (!response.ok) {
+        throw new Error("Failed to add property");
+      }
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Description:</label>
-                        <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                            rows="4"
-                            required
-                        />
-                    </div>
+      // Reset the form
+      setFormData({
+        propertyArea: "",
+        propertyAreaUnit: "Hectares",
+        address: "",
+        propertyPrice: "",
+        soilType: "",
+        isFarmable: false,
+        sellerId: "66b7578acfa0f88a21139026",
+      });
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Price:</label>
-                        <input
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                            required
-                        />
-                    </div>
+      alert("Property added successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to add property.");
+    }
+  };
 
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Category:</label>
-                        <select
-                            name="category"
-                            value={formData.category}
-                            onChange={handleChange}
-                            className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                        >
-                            <option value="Fruits">Fruits</option>
-                            <option value="Vegetables">Vegetables</option>
-                            <option value="Grains">Grains</option>
-                            <option value="Seeds">Seeds</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">Product Image:</label>
-                        <input
-                            type="file"
-                            name="image"
-                            onChange={handleChange}
-                            className="mt-1 p-2 block w-full border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded-md shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                    >
-                        Add Product
-                    </button>
-                </form>
-            </div>
-        </div>
-    );
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg">
+        <h2 className="text-3xl font-bold text-green-800 mb-8 text-center">Add New Property</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Property Area:</label>
+            <input
+              type="number"
+              name="propertyArea"
+              value={formData.propertyArea}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Property Area Unit:</label>
+            <select
+              name="propertyAreaUnit"
+              value={formData.propertyAreaUnit}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              required
+            >
+              <option value="Hectares">Hectares</option>
+              <option value="Acres">Acres</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Property Price:</label>
+            <input
+              type="number"
+              name="propertyPrice"
+              value={formData.propertyPrice}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Soil Type:</label>
+            <input
+              type="text"
+              name="soilType"
+              value={formData.soilType}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              required
+            />
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="isFarmable"
+              checked={formData.isFarmable}
+              onChange={handleChange}
+              className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+            />
+            <label className="ml-2 block text-sm font-medium text-gray-700">Farmable</label>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-green-600 text-white font-semibold rounded-md shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            >
+              Add Property
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
-export default AddProduct;
+export default AddProperty;

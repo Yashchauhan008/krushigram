@@ -29,14 +29,6 @@ const Navbar = () => {
 
         {/* Links and Features for Desktop and Mobile */}
         <div className={`flex-col md:flex-row md:items-center md:space-x-6 ${isMenuOpen ? 'flex' : 'hidden'} md:flex`}>
-          {/* Links */}
-          <div className="flex flex-col md:flex-row md:space-x-4">
-            <Link to="/" className="text-lg hover:bg-green-800 p-2 rounded">Home</Link>
-            <Link to="/about" className="text-lg hover:bg-green-800 p-2 rounded">About Us</Link>
-            <Link to="/contact" className="text-lg hover:bg-green-800 p-2 rounded">Contact</Link>
-            <Link to="/services" className="text-lg hover:bg-green-800 p-2 rounded">Services</Link>
-          </div>            
-
           {/* User Auth Buttons */}
           <div className='mb-3'>
             {!isSignedIn ? (
