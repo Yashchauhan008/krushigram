@@ -6,7 +6,7 @@ import SeedsList from "../components/Seed";
 import '../styles/home.css'
 
 const Home = () => {
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("property");
 
   useEffect(() => {
     // Any side effects related to the category change can go here
