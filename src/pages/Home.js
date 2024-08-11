@@ -3,6 +3,7 @@ import ProductList from "../components/Property";
 import EquipmentList from "../components/equipment";
 import FertilizerList from "../components/Fertilizer ";
 import SeedsList from "../components/Seed";
+import '../styles/home.css'
 
 const Home = () => {
   const [category, setCategory] = useState("all");

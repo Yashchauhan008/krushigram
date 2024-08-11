@@ -1,0 +1,11 @@
+.navbar{
+    background-color: transparent;
+    padding: 20px 100px 20px 100px;
+    /* backdrop-filter: blur(15px); */
+}
+
+.navbar-logo{
+    padding-top: 10px;
+    /* font-family: gilroy; */
+    font-size: 30px;
+}
