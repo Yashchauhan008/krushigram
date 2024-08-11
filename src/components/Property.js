@@ -21,40 +21,29 @@ useEffect(() => {
 console.log(properties)
 
   return (
-    
     <>
-    
-    <div className="cards">
-      {properties.map((property, index) => (
-        <Link to={`/property/${property._id}`} >
-        <div key={index} className="card">
-          <div className="card-img">
-            {/* Example of using the first image from the images array */}
-            <img src={property.images[0]} alt={`Property ${index + 1}`} style={{width:"250px"}} />
-          </div>
-          <div className="card-info">
-            <p className="text-title">
-              Property Area: {property.propertyArea} {property.propertyAreaUnit}
-            </p>
-            <p className="text-body">
-              Address: {property.address}
-              <br />
-              Soil Type: {property.soilType}
-            </p>
-          </div>
-          <div className="card-footer">
-            <span className="text-title">Price: ${property.propertyPrice}</span>
-            <div className="card-button">
-              <svg className="svg-icon" viewBox="0 0 20 20">
-                {/* SVG path or other details */}
-              </svg>
+      <Link to="/detailPage">
+        <div className="cards">
+          {properties.map((property, index) => (
+            <div class="card">
+              <div class="card-image">
+              <img src={property.images[0]} alt={`Property ${index + 1}`} style={{objectFit:"cover",height:'100%',width:"100%"}}/>
+              </div>
+              <div class="category">     Property Area: {property.propertyArea} {property.propertyAreaUnit}
+              </div>
+              <div class="heading">
+                {" "}
+                {/* Address: {property.address.street}, {property.address.city},{" "}
+    {property.address.state} {property.address.pinCode} */}
+                <div class="author">
+                  {" "}
+                  By <span class="name">Abi</span> 4 days ago
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-        </Link>
-      ))}
-      </div>
-      
+      </Link>
     </>
   );
 };
