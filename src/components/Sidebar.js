@@ -46,6 +46,7 @@ const Sidebar = () => {
           } justify-center space-y-4 mt-8`}
         >
           <Link
+            
             to="/home"
             className="flex items-center justify-center p-2 rounded hover:bg-[#59C596]"
             style={{ width: "100%" }}
