@@ -24,7 +24,7 @@ const Sidebar = () => {
     <>
       <div
         style={{ backgroundColor: "#7BE495" }}
-        className={`inline-block transition-transform h-200 backdrop-blur-lg text-black shadow-lg flex flex-col ${
+        className={`inline-block transition-transform  backdrop-blur-lg text-black shadow-lg flex flex-col ${
           isOpen ? "w-64" : "w-15"
         } transition-width duration-500`}
       >
